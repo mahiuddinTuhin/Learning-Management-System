@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
+import globalErrorHandler from "./app/middleware/Error/globalErrorHandler";
 
 const app = express();
 
@@ -28,5 +29,7 @@ app.all("*", (req: Request, res: Response, next: NextFunction) => {
   err.statusCode = 404;
   next(err);
 });
+
+app.use(globalErrorHandler);
 
 export default app;
